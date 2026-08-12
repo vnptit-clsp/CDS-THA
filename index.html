@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đề xuất triển khai Kho dữ liệu dùng chung tỉnh Thanh Hóa</title>
+<style>
+  :root{--navy:#1f3864;--blue:#2e5496;--light:#d9e2f3;--grey:#f5f7fb;--ink:#20242c;--muted:#5b6472;--gold:#b8860b;--red:#b23a2e;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:#eceff4;color:var(--ink);font-family:"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65;}
+  .page{max-width:900px;margin:24px auto;background:#fff;padding:48px 56px;box-shadow:0 2px 18px rgba(0,0,0,.08);border-radius:6px;}
+  .brand{color:var(--blue);font-weight:700;letter-spacing:.5px;font-size:14px;}
+  .sub{color:var(--muted);font-style:italic;font-size:14px;margin-top:4px;}
+  h1.title{color:var(--navy);font-size:26px;margin:18px 0 4px;line-height:1.25;}
+  .lead{color:#404040;font-style:italic;font-size:15px;margin:6px 0 18px;}
+  .rule{height:3px;background:linear-gradient(90deg,var(--blue),var(--light));border-radius:2px;margin:14px 0 22px;}
+  h2{color:var(--navy);font-size:18px;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--light);}
+  p{margin:0 0 12px;}
+  ul{margin:6px 0 14px;padding-left:22px;}
+  li{margin:5px 0;}
+  .principle{display:inline-block;background:var(--navy);color:#fff;padding:2px 10px;border-radius:12px;font-size:13px;font-weight:600;}
+  .cards{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0;}
+  .card{flex:1 1 30%;min-width:180px;background:var(--grey);border:1px solid #dbe3f2;border-top:3px solid var(--blue);border-radius:6px;padding:12px 14px;}
+  .card .h{font-weight:700;color:var(--navy);font-size:14px;margin-bottom:4px;}
+  .card .v{font-size:14px;color:#333;}
+  .kpi{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0;}
+  .kpi div{flex:1 1 22%;min-width:120px;background:#fff;border:1px solid #dbe3f2;border-radius:6px;padding:10px 12px;text-align:center;}
+  .kpi .n{font-size:20px;font-weight:700;color:var(--blue);}
+  .kpi .l{font-size:12.5px;color:var(--muted);}
+  .lever{background:#fff8ec;border:1px solid #e6cd8f;border-left:5px solid var(--gold);border-radius:6px;padding:14px 18px;margin:14px 0;}
+  .lever .t{font-weight:700;color:var(--gold);margin-bottom:6px;}
+  .pain{background:#fdf1ef;border-left:4px solid var(--red);border-radius:4px;padding:12px 16px;margin:12px 0;}
+  .prop{background:var(--grey);border-left:4px solid var(--blue);border-radius:4px;padding:6px 18px 6px;margin:12px 0;}
+  .foot{margin-top:26px;text-align:right;color:var(--muted);font-style:italic;font-size:13px;}
+  @media print{body{background:#fff;}.page{box-shadow:none;margin:0;max-width:none;padding:24px;}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="brand">TẬP ĐOÀN VNPT</div>
+  <div class="sub">(Dự thảo phục vụ trao đổi với UBND tỉnh Thanh Hóa)</div>
+
+  <h1 class="title">ĐỀ XUẤT TRIỂN KHAI KHO DỮ LIỆU DÙNG CHUNG TỈNH THANH HÓA</h1>
+  <p class="lead">Để IOC Thanh Hóa điều hành dựa trên dữ liệu theo nguyên tắc
+    <span class="principle">Đúng · Đủ · Sạch · Sống · Thống nhất · Dùng chung</span></p>
+  <div class="rule"></div>
+
+  <p><b>Thông điệp cốt lõi:</b> Thanh Hóa đã có IOC, nhưng dữ liệu chủ yếu gom thủ công nên IOC mới dừng ở mức “hiển thị”. Muốn điều hành thực sự dựa trên dữ liệu và tuân thủ Luật Dữ liệu, tỉnh cần sớm triển khai Kho dữ liệu dùng chung làm nền tảng. VNPT đã xây dựng và vận hành nền tảng này ở cấp quốc gia và nhiều tỉnh, sẵn sàng đồng hành cùng Thanh Hóa.</p>
+
+  <h2>I. Năng lực đã kiểm chứng của VNPT</h2>
+  <p>VNPT đã triển khai Kho dữ liệu dùng chung / Data Lake ở cả ba cấp:</p>
+  <div class="cards">
+    <div class="card"><div class="h">Cấp Trung ương</div><div class="v">Trung tâm Dữ liệu Quốc gia – TTDLQG (C12), chính đơn vị chủ trì khung dữ liệu quốc gia</div></div>
+    <div class="card"><div class="h">Cấp Bộ ngành</div><div class="v">Viện Hàn lâm Khoa học Xã hội Việt Nam</div></div>
+    <div class="card"><div class="h">Cấp địa phương</div><div class="v">Sơn La, Cao Bằng, TP Cần Thơ (Kho dùng chung Sóc Trăng sau sáp nhập), An Giang (Kho dùng chung Kiên Giang sau sáp nhập)</div></div>
+  </div>
+  <ul>
+    <li><b>Đang thử nghiệm mở rộng:</b> Nghệ An, Phú Thọ.</li>
+    <li>Kho dữ liệu của VNPT <b>đáp ứng đầy đủ Khung kiến trúc dữ liệu quốc gia theo Quyết định 2439/QĐ-TTg</b>, có sẵn <b>hệ thống Từ điển dữ liệu</b> và <b>Khung quản trị dữ liệu</b> — đúng chuẩn TTDLQG yêu cầu.</li>
+    <li>VNPT <b>đang là đơn vị triển khai IOC tại Thanh Hóa</b> (hợp đồng 2026–2028), am hiểu hiện trạng, hạ tầng đã đạt <b>an toàn thông tin cấp độ 3</b> → triển khai nhanh, rủi ro thấp, không phải làm lại.</li>
+  </ul>
+
+  <h2>II. Hiện trạng tại Thanh Hóa</h2>
+  <p>Những kết quả đã có (nền tảng thuận lợi):</p>
+  <div class="kpi">
+    <div><div class="n">14,93 tỷ</div><div class="l">HĐ IOC (2026–2028)</div></div>
+    <div><div class="n">16</div><div class="l">phân hệ giám sát</div></div>
+    <div><div class="n">514</div><div class="l">tài khoản được cấp</div></div>
+    <div><div class="n">Cấp độ 3</div><div class="l">an toàn thông tin</div></div>
+  </div>
+  <p>Điểm nghẽn khiến IOC “chưa sống”, chưa điều hành được dựa trên dữ liệu:</p>
+  <div class="pain">
+    <ul style="margin:0;">
+      <li>Thủ tục hành chính: một phần dữ liệu vẫn cập nhật qua <b>Excel</b> do chưa kết nối hệ thống Bộ ngành;</li>
+      <li>Quan trắc không khí, xả thải: nhận <b>file thô (.txt) qua FTP</b>, phải viết công cụ trung gian xử lý;</li>
+      <li>Giám sát tàu cá: phải <b>crawl dữ liệu</b> từ hệ thống Tổng cục Thủy sản;</li>
+      <li>Y tế, giáo dục: đang tích hợp <b>dở dang</b> từ HIS/HMIS và vnEdu, dữ liệu chưa đầy đủ;</li>
+      <li>Chưa có kho dữ liệu nền chuẩn hóa và trục kết nối liên thông bên dưới IOC.</li>
+    </ul>
+  </div>
+  <p><b>Hệ quả:</b> dữ liệu thiếu tính “sống”, thiếu thống nhất nên các Sở ngành chưa khai thác thường xuyên (mới <b>125/514</b> tài khoản phát sinh sử dụng).</p>
+
+  <h2>III. Khung pháp lý — vì sao Thanh Hóa phải làm Kho dữ liệu ngay</h2>
+  <div class="lever">
+    <div class="t">★ Đòn bẩy: đây là yêu cầu bắt buộc theo pháp luật, không phải “mua thêm phần mềm”.</div>
+    Theo Luật Dữ liệu và các văn bản hướng dẫn của Trung tâm Dữ liệu Quốc gia, <b>mỗi tỉnh bắt buộc tổ chức Kho dữ liệu dùng chung cấp tỉnh</b> — gồm các kho dữ liệu lõi, kho quản trị và trục tích hợp liên thông (LDOP) kết nối lên nền tảng quốc gia (NDOP/TTDLQG).
+  </div>
+  <ul>
+    <li><b>Luật Dữ liệu số 60/2024/QH15</b> và <b>Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15</b>;</li>
+    <li><b>Quyết định số 2439/QĐ-TTg (04/11/2025)</b> — Khung kiến trúc dữ liệu quốc gia, Khung quản trị dữ liệu, Từ điển dữ liệu dùng chung;</li>
+    <li><b>Nghị định số 278/2025/NĐ-CP</b> về kết nối, chia sẻ dữ liệu bắt buộc; Nghị định 165/2025/NĐ-CP; Nghị định 194/2025/NĐ-CP;</li>
+    <li>Thanh Hóa đã ban hành <b>Chỉ thị 10/CT-UBND (12/7/2026)</b> yêu cầu tăng cường xây dựng, kết nối, khai thác dữ liệu cho IOC — cơ sở chính trị để triển khai ngay.</li>
+  </ul>
+  <p>→ Không chỉ để IOC “sống”, Kho dữ liệu dùng chung còn là <b>điều kiện tuân thủ pháp luật</b> và là nền tảng để Thanh Hóa liên thông dữ liệu với Trung ương.</p>
+
+  <h2>IV. Đề xuất của VNPT cho Thanh Hóa</h2>
+  <div class="prop">
+    <ol>
+      <li>Giao VNPT phối hợp Sở Khoa học và Công nghệ <b>khảo sát hiện trạng và lập phương án Kho dữ liệu dùng chung cấp tỉnh</b> theo Quyết định 2439/QĐ-TTg;</li>
+      <li>Xây dựng <b>các kho dữ liệu lõi và kho quản trị dữ liệu</b> (từ điển, danh mục, phân quyền, nhật ký) làm nguồn dữ liệu gốc thống nhất, tin cậy;</li>
+      <li>Thiết lập <b>nền tảng tích hợp LDOP</b> kết nối các Sở ngành và liên thông với TTDLQG, <b>thay thế các luồng thủ công (Excel/FTP/crawl) bằng kết nối API chuẩn</b>;</li>
+      <li>Chuẩn hóa dữ liệu đầu vào cho <b>16 phân hệ IOC</b>, ưu tiên các lĩnh vực đang dở dang: y tế (HIS/HMIS), giáo dục (vnEdu), TTHC, môi trường;</li>
+      <li>Ban hành <b>quy chế cung cấp, cập nhật, chia sẻ dữ liệu</b> để bảo đảm dữ liệu “sống” và được duy trì thường xuyên.</li>
+    </ol>
+  </div>
+  <p><b>Kiến nghị:</b> UBND tỉnh sớm cho chủ trương để VNPT phối hợp Sở KH&CN khảo sát, đề xuất phương án Kho dữ liệu dùng chung — đưa IOC Thanh Hóa trở thành công cụ điều hành dựa trên dữ liệu đúng nghĩa và sẵn sàng liên thông với Trung tâm Dữ liệu Quốc gia.</p>
+
+  <div class="foot">(Dự thảo – phục vụ trao đổi)</div>
+</div>
+</body>
+</html>
