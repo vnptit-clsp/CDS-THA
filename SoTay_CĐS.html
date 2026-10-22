@@ -1,0 +1,731 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Sổ tay tư vấn CĐS tỉnh</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: phần chung ở đầu; hai tab Slide / Đề án, mỗi tab một chuỗi mục: quy trình, đầu vào, khung, nguyên tắc, checklist */
+:root{
+  --bg:#f6f8fa; --surface:#ffffff; --fg:#14212b; --muted:#566573; --line:#d9e1e8;
+  --accent:#0b5c8f; --accent-soft:#e3eef6; --gate:#a2560c; --gate-soft:#fbefe2; --ok:#1f7a4d;
+  --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f161c; --surface:#16212a; --fg:#e4ecf2; --muted:#9aabb8; --line:#2a3946;
+  --accent:#6cb4e4; --accent-soft:#163246; --gate:#f0a35c; --gate-soft:#3a2614; --ok:#5fd09a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f161c; --surface:#16212a; --fg:#e4ecf2; --muted:#9aabb8; --line:#2a3946;
+  --accent:#6cb4e4; --accent-soft:#163246; --gate:#f0a35c; --gate-soft:#3a2614; --ok:#5fd09a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1000px;margin:0 auto;padding-block:40px 64px;display:flex;flex-direction:column;gap:36px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.25}
+h1{font-size:clamp(26px,4vw,34px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:21px;font-weight:700;display:flex;align-items:baseline;gap:10px}
+h2 .n{font-family:var(--f-mono);font-size:13px;color:var(--accent);letter-spacing:.04em}
+h3{font-size:15px;font-weight:600}
+p{margin:0}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.lead{max-width:72ch;color:var(--muted);font-size:15px}
+.mono{font-family:var(--f-mono);font-size:12.5px}
+section{display:flex;flex-direction:column;gap:14px}
+.intro{display:flex;flex-direction:column;gap:14px}
+.basis{font-size:13.5px;color:var(--muted);max-width:82ch}
+.basis b{color:var(--fg);font-weight:600}
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.role{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.role .tag{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.role p{font-size:14px}
+.note{font-size:13.5px;color:var(--muted)}
+
+/* Tabs */
+.tabs{display:flex;gap:4px;border-bottom:2px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;padding-top:6px}
+.tab{appearance:none;border:0;background:none;font:inherit;font-weight:600;font-size:16px;color:var(--muted);padding:12px 18px 10px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;display:flex;flex-direction:column;align-items:flex-start;gap:0;text-align:left}
+.tab small{font-weight:400;font-size:12.5px}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tab:hover{color:var(--fg)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.panel-tab{display:flex;flex-direction:column;gap:40px;padding-top:8px}
+.tabsum{background:var(--accent-soft);border-radius:10px;padding:14px 18px;display:flex;flex-wrap:wrap;gap:8px 28px;font-size:14px}
+.tabsum b{font-weight:600}
+
+/* Steps */
+.steps{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.colhead,.step{display:grid;grid-template-columns:120px minmax(0,1.3fr) minmax(0,1fr) minmax(0,.9fr);gap:18px;padding:14px 0;border-bottom:1px solid var(--line)}
+.colhead{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:10px 0}
+.step .id{display:flex;flex-direction:column;gap:2px}
+.step .id .k{font-family:var(--f-mono);font-size:20px;color:var(--accent)}
+.step .id .t{font-weight:600;font-size:14.5px;line-height:1.35}
+.step .id .w{font-size:12.5px;color:var(--muted)}
+.step ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px;font-size:14px}
+.who{font-weight:600;color:var(--fg)}
+.cell{min-width:0;font-size:14px}
+.cell .lbl{display:none;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:2px}
+.final{color:var(--ok);font-weight:600}
+.gate{grid-column:1/-1;display:flex;gap:10px;align-items:center;background:var(--gate-soft);color:var(--gate);border-radius:8px;padding:7px 12px;font-size:13.5px;font-weight:500}
+.gate .mono{font-weight:600}
+.warn{background:var(--gate-soft);border-radius:10px;padding:12px 16px;font-size:14px}
+.warn b{color:var(--gate)}
+
+/* Inputs */
+.must{display:inline-block;font-size:11px;font-weight:600;color:var(--gate);background:var(--gate-soft);border-radius:4px;padding:0 6px;margin-left:4px;letter-spacing:.02em}
+.ingroups{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.ing{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.ing.prio{border:2px solid var(--accent);background:var(--accent-soft);grid-column:1/-1}
+.ing .use{font-size:12.5px;color:var(--accent);font-weight:500}
+.ing .src{font-size:12.5px;color:var(--muted)}
+.cb{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;cursor:pointer;padding:4px 6px;border-radius:6px;line-height:1.5}
+.cb:hover{background:var(--accent-soft)}
+.cb input{margin-top:3px;accent-color:var(--accent);width:15px;height:15px;flex:none}
+.cb input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cb input:checked + span{color:var(--muted)}
+.progress{font-size:13px;color:var(--muted)}
+
+/* Tables */
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--f-mono);font-size:12.5px}
+td.nm{font-weight:600;min-width:150px}
+td.g{font-family:var(--f-mono);font-size:12.5px;color:var(--accent);white-space:nowrap}
+tr.sub2 td{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:10px 8px 4px}
+tr.part td{background:var(--accent-soft);font-weight:600;font-size:13px;color:var(--accent);padding:6px 8px}
+
+table.raci th,table.raci td{text-align:center}
+table.raci td:first-child,table.raci th:first-child{text-align:left;min-width:220px}
+table.raci th.grp{color:var(--accent);border-bottom:1px solid var(--line)}
+table.raci td{font-family:var(--f-mono);font-size:12.5px}
+table.raci td:first-child{font-family:var(--f-body);font-size:14px}
+table.raci td.a{background:var(--accent-soft);color:var(--accent);font-weight:600}
+/* Anatomy */
+.sub{margin-top:8px}
+.anatomy{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.slide{aspect-ratio:16/9;max-width:100%;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:4%;display:grid;grid-template-rows:6% 10% 17% 1fr 15% 5%;gap:3%}
+.z{border:1.5px dashed var(--line);border-radius:4px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center}
+.z i{font-style:normal;font-family:var(--f-mono);font-size:12px;font-weight:600;color:var(--accent);background:var(--surface);border:1px solid var(--accent);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center}
+.z1{width:45%}.z2{width:70%}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:3%}
+.kpi.dark,.band{background:var(--accent);border:1.5px solid var(--accent)}
+.blocks{display:grid;grid-template-columns:1fr 1fr;gap:3%}
+.z6{width:80%;background:none}
+.legend{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+
+/* Lists */
+.outline{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.outline li b{font-weight:600}
+.outline ul{margin:4px 0 0;padding-left:18px;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px 24px;margin:0;padding:0;list-style:none;counter-reset:r}
+.rules li{counter-increment:r;display:grid;grid-template-columns:28px 1fr;gap:6px;font-size:14px}
+.rules li::before{content:counter(r);font-family:var(--f-mono);color:var(--accent);font-size:13px;padding-top:2px}
+.rules b{font-weight:600}
+.check{display:flex;flex-direction:column;gap:2px}
+.forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:6px 20px;font-size:14px}
+.forms div{display:grid;grid-template-columns:52px 1fr;gap:6px}
+.forms .mono{color:var(--accent);padding-top:2px}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+@media (max-width:760px){
+  .colhead{display:none}
+  .step{grid-template-columns:1fr;gap:10px}
+  .cell .lbl{display:block}
+  .anatomy{grid-template-columns:1fr}
+  .tab{font-size:15px;padding:10px 12px 8px}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<div class="wrap">
+
+<header class="intro">
+  <div class="eyebrow">Ban CLSP · Hướng dẫn nội bộ</div>
+  <h1>Sổ tay tư vấn chuyển đổi số cho tỉnh, thành phố</h1>
+  <p class="lead">Hai sản phẩm, hai quy trình riêng. <b>Slide tư vấn</b> dùng để báo cáo, tham vấn lãnh đạo tỉnh, khoảng 30 trang, làm xong trong 1 tuần cho một tỉnh nếu tỉnh cung cấp đủ số liệu. <b>Đề án CĐS</b> là văn bản tỉnh ban hành, làm trong 8–10 tuần và dùng slide ở bước tham vấn. Chọn tab tương ứng bên dưới.</p>
+  <p class="basis"><b>Căn cứ:</b> Luật Chuyển đổi số 148/2025/QH15, Điều 12 khoản 3; NĐ 224/2026/NĐ-CP, Điều 4 và Điều 7; QĐ 1266/QĐ-TTg ngày 14/7/2026, Điều 2 khoản 4 điểm a (cụ thể hóa Chiến lược vào “chương trình, kế hoạch, đề án” của địa phương). Nội bộ: TB 4248/TB-VNPTIT-VP-TL ngày 14/10/2026.</p>
+</header>
+
+<section aria-labelledby="s-roles">
+  <h2 id="s-roles">Ai làm gì: mô hình “thiết kế – thi công”</h2>
+  <div class="roles">
+    <div class="role"><span class="tag">Thiết kế</span><h3>Ban CLSP</h3><p>Viết slide và đề án; giải trình, bảo vệ. Xong việc khi đề án được ban hành và đã bàn giao cho Ban KDGP.</p></div>
+    <div class="role"><span class="tag">Đầu mối địa bàn</span><h3>VNPT TTp</h3><p>Quan hệ với tỉnh, sở, ngành; tự chủ khảo sát; tổ chức buổi làm việc; nắm cơ hội kinh doanh.</p></div>
+    <div class="role"><span class="tag">Thi công</span><h3>Ban KDGP</h3><p>Tham vấn khái toán; nhận bàn giao, bóc tách nhiệm vụ, xúc tiến vốn và hợp đồng.</p></div>
+    <div class="role"><span class="tag">Phối hợp</span><h3>TTGP chuyên ngành, SBU</h3><p>Cung cấp nội dung chuyên ngành, rà soát năng lực giải pháp theo danh mục nhiệm vụ.</p></div>
+  </div>
+  <p class="note">Ban CLSP không tự khảo sát và không tự tiếp xúc khách hàng tại địa bàn; đi công tác tỉnh chỉ khi trình bày, dự họp Tổ chuyên gia hoặc bảo vệ đề án.</p>
+</section>
+
+<div>
+<div class="tabs" role="tablist" aria-label="Chọn sản phẩm">
+  <button class="tab" role="tab" id="t-slide" aria-controls="p-slide" aria-selected="true">Slide tư vấn<small>Khoảng 30 trang · 1 tuần/tỉnh</small></button>
+  <button class="tab" role="tab" id="t-dean" aria-controls="p-dean" aria-selected="false" tabindex="-1">Đề án CĐS<small>Thuyết minh, phụ lục · 8–10 tuần</small></button>
+</div>
+
+<!-- ================= TAB SLIDE ================= -->
+<div class="panel-tab" role="tabpanel" id="p-slide" aria-labelledby="t-slide">
+
+  <div class="tabsum">
+    <span><b>Mục đích:</b> báo cáo, tham vấn lãnh đạo tỉnh; đưa ra bức tranh tổng thể và hiệu quả của nhiệm vụ trọng tâm</span>
+    <span><b>Trục chính:</b> kế hoạch CĐS của chính tỉnh</span>
+    <span><b>Rà soát:</b> Lãnh đạo Công ty, VNPT TTp</span>
+    <span><b>Hình thức:</b> tài liệu riêng, phiên trình bày riêng của Ban CLSP</span>
+    <span><b>Thời gian:</b> 1 tuần/tỉnh, tính từ khi có đủ văn bản “Ưu tiên số 1”</span>
+  </div>
+
+  <section aria-labelledby="sl-steps">
+    <h2 id="sl-steps"><span class="n">S1</span>Quy trình làm slide</h2>
+    <div class="steps">
+      <div class="colhead"><span>Bước</span><span>Việc cần làm</span><span>Đầu vào · ai cung cấp</span><span>Đầu ra</span></div>
+
+      <div class="step">
+        <div class="id"><span class="k">1</span><span class="t">Làm rõ yêu cầu buổi trình bày</span><span class="w">Ngày 1</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Xác định mục đích (tham vấn đề án, báo cáo lãnh đạo tỉnh), người nghe, thời lượng, số trang</li>
+          <li>Lập đề cương slide theo khung ở mục S4</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Yêu cầu, lịch làm việc của tỉnh <span class="who">(VNPT TTp)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div>Đề cương slide, số trang dự kiến</div>
+      </div>
+
+      <div class="step">
+        <div class="id"><span class="k">2</span><span class="t">Thu thập văn bản</span><span class="w">Trước ngày 1</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Lấy đủ nhóm “Ưu tiên số 1” ở mục S3 trước; sau đó đối chiếu 10 nhóm còn lại</li>
+          <li>Đề nghị tỉnh bổ sung văn bản còn thiếu trong nhóm bắt buộc</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Văn bản Trung ương <span class="who">(Ban CLSP)</span>; văn bản tỉnh <span class="who">(qua VNPT TTp)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div>Thư mục tài liệu; danh mục văn bản kèm số hiệu, ngày</div>
+      </div>
+
+      <div class="step">
+        <div class="id"><span class="k">3</span><span class="t">Trích hiện trạng có nguồn</span><span class="w">Ngày 1–2</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Trích nguyên văn số liệu cho từng ô, ghi nguồn</li>
+          <li>Các nguồn ghi số khác nhau thì dùng số mới nhất, nêu số khác trong ghi chú</li>
+          <li>Không có số thì ghi “Chưa có số liệu”</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Báo cáo, kế hoạch của tỉnh <span class="who">(qua VNPT TTp)</span>; báo chí, niên giám <span class="who">(Ban CLSP)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div>Bảng hiện trạng (BM02); bảng chênh lệch (BM03)</div>
+      </div>
+
+      <div class="step">
+        <div class="id"><span class="k">4</span><span class="t">Dựng khung nhóm và chỉ tiêu</span><span class="w">Ngày 2</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Xếp các nhóm nhiệm vụ theo lớp QĐ 1425, đánh số liên tục</li>
+          <li>Chép chỉ tiêu nguyên văn; mỗi chỉ tiêu gắn với một nhóm</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Kế hoạch CĐS tỉnh, QĐ 1266, QĐ 1425 <span class="who">(Ban CLSP)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div>Trang 13 (chỉ tiêu), 14 (khung nhóm), 21 (ma trận)</div>
+      </div>
+
+      <div class="step">
+        <div class="id"><span class="k">5</span><span class="t">Dựng các trang nội dung</span><span class="w">Ngày 3–4</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Dựng Phần I, II; các trang minh họa theo bố cục chuẩn (mục S4)</li>
+          <li>Đánh dấu “(đề xuất VNPT)” ở nội dung tỉnh chưa nêu</li>
+          <li>Đưa nội dung nhạy cảm, nguồn chi tiết vào ghi chú trang</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Kết quả bước 3–4 <span class="who">(Ban CLSP)</span>; kế hoạch CĐS của các sở y tế, giáo dục… <span class="who">(qua VNPT TTp)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div>Phần I (tr. 4–8), Phần II (tr. 10–19)</div>
+      </div>
+
+      <div class="step">
+        <div class="id"><span class="k">6</span><span class="t">Hiệu quả và đề xuất</span><span class="w">Ngày 4</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Tính điểm DTI dự kiến, tỷ trọng kinh tế số, lộ trình</li>
+          <li>Hỏi VNPT TTp muốn nhấn mạnh nội dung gì, rồi viết trang đề xuất</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Bộ chỉ số DTI <span class="who">(Ban CLSP)</span>; kết quả DTI, kế hoạch nâng cao DTI <span class="who">(qua VNPT TTp)</span>; nội dung cần nhấn mạnh ở trang đề xuất <span class="who">(VNPT TTp)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div>Phần III (tr. 21–24), Phần IV (tr. 26), phụ lục</div>
+      </div>
+
+      <div class="step">
+        <div class="id"><span class="k">7</span><span class="t">Rà soát, chỉnh sửa</span><span class="w">Ngày 5</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Rà checklist (mục S6)</li>
+          <li>Trình bày tại buổi rà soát với Lãnh đạo Công ty và VNPT TTp; hoặc gửi lãnh đạo VNPT TTp nhận xét, không cần họp (tùy từng tỉnh)</li>
+          <li>Ghi nhận góp ý của VNPT TTp và chỉnh sửa</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Góp ý <span class="who">(Lãnh đạo Công ty, lãnh đạo VNPT TTp)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div><span class="final">Slide tư vấn hoàn chỉnh</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="sl-raci">
+    <h2 id="sl-raci"><span class="n">S2</span>Phân công VNPT IT – VNPT TTp (RACI)</h2>
+    <p class="lead">R – Thực hiện · A – Chịu trách nhiệm cuối cùng · C – Tham vấn · I – Được thông báo. Mỗi việc có đúng một A. Ban CLSP không làm việc trực tiếp với Sở KH&amp;CN hay lãnh đạo tỉnh; mọi trao đổi với tỉnh đi qua VNPT TTp.</p>
+    <div class="tbl"><table class="raci">
+      <thead>
+        <tr><th rowspan="2">Việc</th><th colspan="2" class="grp">VNPT IT</th><th class="grp">Địa bàn</th></tr>
+        <tr><th>Ban CLSP</th><th>Lãnh đạo VNPT IT</th><th>VNPT TTp</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Thống nhất với tỉnh mục đích, thời gian buổi trình bày</td><td>C</td><td>I</td><td class="a">A/R</td></tr>
+        <tr><td>Lấy văn bản “Ưu tiên số 1” từ tỉnh (kế hoạch CĐS 2026–2030, bài toán lớn, báo cáo khảo sát, DTI)</td><td>C (nêu danh mục)</td><td>–</td><td class="a">A/R</td></tr>
+        <tr><td>Tra cứu văn bản Trung ương</td><td class="a">A/R</td><td>–</td><td>–</td></tr>
+        <tr><td>Trích hiện trạng có nguồn, lập bảng chênh lệch số liệu</td><td class="a">A/R</td><td>–</td><td>I</td></tr>
+        <tr><td>Hỏi tỉnh xác nhận số liệu còn chênh lệch, chuyển kết quả về Ban CLSP</td><td>C</td><td>–</td><td class="a">A/R</td></tr>
+        <tr><td>Dựng khung nhóm, chỉ tiêu, các trang minh họa</td><td class="a">A/R</td><td>–</td><td>I</td></tr>
+        <tr><td>Xác định nội dung cần nhấn mạnh ở trang đề xuất</td><td>C</td><td>I</td><td class="a">A/R</td></tr>
+        <tr><td>Trình bày tại buổi rà soát với Lãnh đạo Công ty và VNPT TTp</td><td class="a">A/R</td><td>C</td><td>C</td></tr>
+        <tr><td>Nhận xét slide (tại buổi rà soát, hoặc bằng văn bản nếu không họp)</td><td>I</td><td>C</td><td class="a">A/R</td></tr>
+        <tr><td>Ghi nhận góp ý, chỉnh sửa slide</td><td class="a">A/R</td><td>I</td><td>C</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Ban CLSP làm nội dung, trình bày tại buổi rà soát và chỉnh sửa; VNPT TTp là đầu mối duy nhất với tỉnh (lấy văn bản, hỏi xác nhận số liệu), chọn nội dung nhấn mạnh và nhận xét slide.</p>
+  </section>
+
+  <section aria-labelledby="sl-inputs">
+    <h2 id="sl-inputs"><span class="n">S3</span>Văn bản đầu vào cho slide</h2>
+    <p class="lead">Nhóm “Ưu tiên số 1” gồm các văn bản quan trọng nhất tỉnh cần cung cấp: kế hoạch CĐS 2026–2030, bài toán lớn và hiện trạng CĐS qua các báo cáo khảo sát, DTI. Mười nhóm còn lại để bổ sung. Văn bản có nhãn <span class="must">Bắt buộc</span> phải có trước khi dựng slide. Dòng “Dùng cho” chỉ phần, trang slide ở mục S4. Tích vào ô để theo dõi việc thu thập; trạng thái lưu riêng trên máy của từng người.</p>
+    <p class="progress" id="prog-in" aria-live="polite">Đã có 0/0 văn bản</p>
+    <div class="ingroups" id="inputs">
+      <div class="ing prio"><h3>Ưu tiên số 1. Văn bản quan trọng nhất của tỉnh</h3><span class="use">Dùng cho: toàn bộ slide; thiếu nhóm này thì chưa dựng slide</span><p class="src">Sở KH&amp;CN (qua VNPT TTp)</p>
+        <label class="cb"><input type="checkbox" id="p1"><span>Kế hoạch CĐS giai đoạn 2026–2030 của tỉnh (trục chính của slide) <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="p2"><span>Danh mục bài toán lớn của tỉnh <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="p3"><span>Báo cáo khảo sát 214 <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="p4"><span>Báo cáo khảo sát phục vụ xây dựng Khung kiến trúc số <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="p5"><span>Báo cáo khảo sát phục vụ xây dựng Khung kiến trúc dữ liệu <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="p6"><span>Kết quả công bố chỉ số DTI của tỉnh <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="p7"><span>Kế hoạch nâng cao chỉ số DTI (nếu có)</span></label>
+      </div>
+      <div class="ing"><h3>1. Đảng, Luật, Nghị định</h3><span class="use">Dùng cho: tr. 5, 8</span><p class="src">Ban CLSP tự tra cứu</p>
+        <label class="cb"><input type="checkbox" id="i1a"><span>NQ 57-NQ/TW ngày 22/12/2024 <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="i1b"><span>Luật Chuyển đổi số 148/2025/QH15 <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="i1c"><span>NĐ 224/2026/NĐ-CP hướng dẫn Luật Chuyển đổi số</span></label>
+        <label class="cb"><input type="checkbox" id="i1d"><span>Luật Dữ liệu 60/2024/QH15; NĐ 278/2025/NĐ-CP</span></label>
+      </div>
+      <div class="ing"><h3>2. Chiến lược, khung kiến trúc quốc gia</h3><span class="use">Dùng cho: tr. 5, 12, 14</span><p class="src">Ban CLSP tra cứu</p>
+        <label class="cb"><input type="checkbox" id="i2a"><span>QĐ 1266/QĐ-TTg ngày 14/7/2026, Chiến lược quốc gia về CĐS <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="i2b"><span>QĐ 1425/QĐ-TTg, Khung kiến trúc tổng thể quốc gia số (lấy nguyên văn tên lớp) <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="i2c"><span>QĐ 2439/QĐ-TTg, Khung kiến trúc dữ liệu quốc gia</span></label>
+        <label class="cb"><input type="checkbox" id="i2d"><span>QĐ 1132/QĐ-TTg, 79 nền tảng số dùng chung quốc gia</span></label>
+      </div>
+      <div class="ing"><h3>3. Đo lường của Bộ</h3><span class="use">Dùng cho: tr. 22, 23</span><p class="src">Ban CLSP tra cứu</p>
+        <label class="cb"><input type="checkbox" id="i3a"><span>QĐ 405/QĐ-BKHCN, Bộ chỉ số DTI; dự thảo bộ chỉ số mới (ghi phiên bản) <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="i3b"><span>Cách đo tỷ trọng kinh tế số trong GRDP của cơ quan thống kê</span></label>
+      </div>
+      <div class="ing"><h3>4. Đảng bộ tỉnh</h3><span class="use">Dùng cho: tr. 4, 13</span><p class="src">Sở KH&amp;CN, Văn phòng Tỉnh ủy (qua VNPT TTp)</p>
+        <label class="cb"><input type="checkbox" id="i4a"><span>Nghị quyết Đại hội Đảng bộ tỉnh nhiệm kỳ 2025–2030 <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="i4b"><span>Chương trình hành động của Tỉnh ủy; văn bản thực hiện NQ 57</span></label>
+      </div>
+      <div class="ing"><h3>5. Kế hoạch của UBND tỉnh</h3><span class="use">Dùng cho: tr. 13, 14, 21, 24</span><p class="src">Sở KH&amp;CN (qua VNPT TTp)</p>
+        <label class="cb"><input type="checkbox" id="i5b"><span>Kế hoạch CĐS năm hiện hành (phần kết quả năm trước) <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="i5c"><span>Kế hoạch thực hiện NQ 71, triển khai QĐ 1266; quy hoạch tỉnh</span></label>
+      </div>
+      <div class="ing"><h3>6. Kiến trúc, dữ liệu của tỉnh</h3><span class="use">Dùng cho: tr. 7, phụ lục</span><p class="src">Sở KH&amp;CN, Công an tỉnh (qua VNPT TTp)</p>
+        <label class="cb"><input type="checkbox" id="i6a"><span>Khung kiến trúc số tỉnh <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="i6b"><span>Khung kiến trúc dữ liệu tỉnh; danh mục CSDL, dữ liệu mở; hồ sơ IOC</span></label>
+      </div>
+      <div class="ing"><h3>7. Báo cáo kết quả, kết luận</h3><span class="use">Dùng cho: tr. 6, 7</span><p class="src">Sở KH&amp;CN, Văn phòng UBND tỉnh (qua VNPT TTp)</p>
+        <label class="cb"><input type="checkbox" id="i7a"><span>Báo cáo kết quả CĐS gần nhất <span class="must">Bắt buộc</span></span></label>
+        <label class="cb"><input type="checkbox" id="i7b"><span>Hồ sơ tự đánh giá DTI của tỉnh</span></label>
+        <label class="cb"><input type="checkbox" id="i7c"><span>Thông báo kết luận của Chính phủ, Thủ tướng làm việc với tỉnh</span></label>
+      </div>
+      <div class="ing"><h3>8. Sở, ngành</h3><span class="use">Dùng cho: tr. 15–19</span><p class="src">Các sở (qua VNPT TTp)</p>
+        <label class="cb"><input type="checkbox" id="i8a"><span>Kế hoạch CĐS của Sở Y tế, Sở GD&amp;ĐT, Sở NN&amp;MT, Sở VHTTDL…</span></label>
+      </div>
+      <div class="ing"><h3>9. Số liệu công khai</h3><span class="use">Dùng cho: ô số liệu trên mọi trang</span><p class="src">Ban CLSP tra cứu; ghi tên báo hoặc niên giám, ngày</p>
+        <label class="cb"><input type="checkbox" id="i9a"><span>Niên giám thống kê; báo cáo kinh tế – xã hội của tỉnh</span></label>
+        <label class="cb"><input type="checkbox" id="i9b"><span>Báo chí chính thống (khi văn bản tỉnh không có số liệu)</span></label>
+      </div>
+      <div class="ing"><h3>10. Nội bộ VNPT</h3><span class="use">Dùng cho: tr. 26, phụ lục</span><p class="src">Ban CLSP</p>
+        <label class="cb"><input type="checkbox" id="i10b"><span>Danh mục giải pháp VNPT IT; slide mẫu Đồng Tháp – Cà Mau</span></label>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="sl-frame">
+    <h2 id="sl-frame"><span class="n">S4</span>Khung slide</h2>
+    <p class="lead">Theo bản Cà Mau v8 (34 trang, gồm chuyển phần và phụ lục). Tên trang lấy theo bản Cà Mau; phần trong ngoặc vuông thay theo từng tỉnh. Phần II đi thẳng từ khung toàn bộ nhóm nhiệm vụ (tr. 14) sang các trang minh họa, rồi chuyển sang Phần III.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Tr.</th><th>Trang</th><th>Nội dung chính</th><th>Nhóm VB</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1–2</td><td class="nm">Bìa · Bố cục nội dung</td><td>Tên tài liệu, đơn vị, tháng; 4 phần và phụ lục</td><td>–</td></tr>
+        <tr class="part"><td colspan="4">I. Bức tranh tổng thể, sự cần thiết · chuyển phần tr. 3</td></tr>
+        <tr><td class="num">4</td><td class="nm">Vị trí và định hướng phát triển của tỉnh</td><td>Diện tích, dân số, số xã, phường; định hướng của NQ Đại hội</td><td class="g">4 · 9</td></tr>
+        <tr><td class="num">5</td><td class="nm">Yêu cầu của Trung ương và thời hạn thực hiện</td><td>Khung kiến trúc số, kết nối dữ liệu, kế hoạch CĐS; mốc thời hạn gần nhất</td><td class="g">1 · 2</td></tr>
+        <tr><td class="num">6</td><td class="nm">Kết quả chuyển đổi số của tỉnh đến [thời điểm]</td><td>Chỉ số xếp hạng, mục tiêu năm đạt được, TTHC, kinh tế số trong GRDP</td><td class="g">ƯT1 · 7</td></tr>
+        <tr><td class="num">7</td><td class="nm">Hiện trạng dữ liệu, Kho dữ liệu dùng chung và IOC</td><td>Danh mục CSDL, kết nối LGSP, lĩnh vực trên IOC</td><td class="g">ƯT1 · 6</td></tr>
+        <tr><td class="num">8</td><td class="nm">Sự cần thiết xây dựng Đề án và các mốc thời hạn</td><td>Sau hợp nhất; pháp lý có thời hạn; cụ thể hóa kế hoạch CĐS; tập trung nguồn lực</td><td class="g">ƯT1 · 1 · 5</td></tr>
+        <tr class="part"><td colspan="4">II. Đề xuất khung Đề án chuyển đổi số tỉnh · chuyển phần tr. 9</td></tr>
+        <tr><td class="num">10</td><td class="nm">Quy trình xây dựng Đề án</td><td>Các bước, thời gian (Cà Mau: 05 bước, khoảng 09 tuần)</td><td>–</td></tr>
+        <tr><td class="num">11</td><td class="nm">Khung cấu trúc tổng thể Đề án</td><td>Các phần và hệ thống phụ lục (Cà Mau: 09 phần)</td><td>–</td></tr>
+        <tr><td class="num">12</td><td class="nm">Nguyên tắc rà soát, tránh đầu tư trùng lặp</td><td>Các bộ lọc: QĐ 1425/QĐ-TTg, QĐ 2439/QĐ-TTg, nền tảng dùng chung</td><td class="g">2</td></tr>
+        <tr><td class="num">13</td><td class="nm">Chỉ tiêu tỉnh được giao: hiện trạng và mục tiêu</td><td>Chỉ tiêu nguyên văn theo kế hoạch CĐS của tỉnh; hiện trạng, 2027, 2030</td><td class="g">ƯT1 · 5</td></tr>
+        <tr><td class="num">14</td><td class="nm">Khung [số] nhóm nhiệm vụ gắn với thế mạnh của tỉnh</td><td>Toàn bộ nhóm theo các lớp kiến trúc; chú thích nâng cấp/xây mới, có nội dung cấp xã, bổ sung ngoài kế hoạch</td><td class="g">ƯT1 · 2 · 5</td></tr>
+        <tr><td class="num">15–19</td><td class="nm">Minh họa nhóm nhiệm vụ tiêu biểu</td><td>Chọn theo đặc thù tỉnh, không minh họa đủ các lớp. Cà Mau: Nhóm 30 Y tế; Nhóm 31 Giáo dục; Nhóm 18, 19, 27, 28, 29 Nông nghiệp và môi trường; Nhóm 23, 36 Du lịch; Nhóm 16 Chuyển đổi số cấp xã</td><td class="g">ƯT1 · 8 · 9</td></tr>
+        <tr class="part"><td colspan="4">III. Hiệu quả đạt được · chuyển phần tr. 20</td></tr>
+        <tr><td class="num">21</td><td class="nm">Ma trận chỉ tiêu và nhóm nhiệm vụ</td><td>Chỉ tiêu của kế hoạch tỉnh × khung nhóm nhiệm vụ (tr. 14)</td><td class="g">ƯT1 · 5</td></tr>
+        <tr><td class="num">22</td><td class="nm">Kinh tế số trong GRDP: phương pháp đo và nhiệm vụ</td><td>Cách cơ quan thống kê đo; nhiệm vụ tác động</td><td class="g">3 · 5</td></tr>
+        <tr><td class="num">23</td><td class="nm">Chỉ số DTI: nhóm nhiệm vụ thúc đẩy và điểm dự kiến</td><td>Chỉ số chính × khung nhóm; ghi phiên bản bộ chỉ số</td><td class="g">ƯT1 · 3</td></tr>
+        <tr><td class="num">24</td><td class="nm">Lộ trình triển khai và kết quả theo mốc</td><td>Theo mốc 2026, 2027, 2030</td><td class="g">ƯT1 · 5</td></tr>
+        <tr class="part"><td colspan="4">IV. Đề xuất, kiến nghị · chuyển phần tr. 25</td></tr>
+        <tr><td class="num">26</td><td class="nm">Đề xuất, kiến nghị</td><td>Đề xuất UBND tỉnh; cam kết của VNPT. Nội dung nhấn mạnh tùy từng tỉnh, hỏi VNPT TTp</td><td>–</td></tr>
+        <tr><td class="num">27</td><td class="nm">Trân trọng cảm ơn</td><td>–</td><td>–</td></tr>
+        <tr class="part"><td colspan="4">Phụ lục: chi tiết và chứng minh hiệu quả · chuyển phần tr. 28</td></tr>
+        <tr><td class="num">29–34</td><td class="nm">Chi tiết theo nhóm, chứng minh hiệu quả</td><td>Cà Mau: lộ trình dữ liệu; nhiệm vụ AI; y tế; giáo dục; tác động đến chỉ tiêu theo cách đo; điểm DTI theo nhiệm vụ</td><td class="g">3 · 6 · 8</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="sub" id="khung">Cách dựng khung nhóm nhiệm vụ đầy đủ (tr. 14)</h3>
+    <p class="note">Khung đúng là khung mà mọi nhiệm vụ, dự án của tỉnh đều có chỗ đứng, mọi chỉ tiêu đều có nhóm thực hiện, và mỗi nhóm có trạng thái kèm nguồn. Làm trên một bảng Excel (cột ở cuối mục này), sau đó mới vẽ lên slide.</p>
+    <ol class="outline">
+      <li><b>Dựng xương theo lớp kiến trúc.</b> Thể chế và 4 lớp theo QĐ 1425/QĐ-TTg (tên lớp chép nguyên văn). Đặt sẵn các nhóm nền mà tỉnh nào cũng có, lấy khung 38 nhóm Cà Mau làm mẫu.<ul><li>Ví dụ nhóm nền: trung tâm dữ liệu, an toàn thông tin, Kho dữ liệu dùng chung, CSDL, dữ liệu mở, TTHC, IOC, y tế, giáo dục, kênh tương tác.</li></ul></li>
+      <li><b>Rải toàn bộ nhiệm vụ của tỉnh vào khung.</b> Lấy từng nhiệm vụ, dự án trong kế hoạch CĐS 2026–2030, danh mục nhiệm vụ của Khung kiến trúc số tỉnh và danh mục bài toán lớn. Mỗi mục xếp vào đúng một nhóm.<ul><li>Không được sót: đếm đủ số nhiệm vụ, dự án của kế hoạch (Cà Mau: KH 556 có 42 nhiệm vụ, 45 dự án).</li><li>Một nhiệm vụ không vừa với nhóm nào thì tạo nhóm mới.</li></ul></li>
+      <li><b>Thêm nhóm đặc thù của tỉnh.</b> Tìm từ đột phá trong NQ Đại hội, ngành chủ lực trong GRDP, bài toán lớn, quy hoạch tỉnh và điều kiện địa lý (biển, đảo, biên giới, vùng đồng bào dân tộc).<ul><li>Cà Mau: nuôi tôm số; nghề cá, chống khai thác IUU; kinh tế biển, cảng Hòn Khoai, logistics; năng lượng số (điện gió, khí – điện – đạm); du lịch thông minh Mũi Cà Mau; kinh tế không gian tầm thấp (UAV); cảnh báo sớm thiên tai, xâm nhập mặn; chuẩn hóa, hợp nhất dữ liệu hai tỉnh cũ.</li><li>Nhóm tỉnh chưa nêu trong kế hoạch thì đánh dấu “Bổ sung ngoài kế hoạch”. Chỉ bổ sung khi tỉnh có cơ sở thực tế.</li></ul></li>
+      <li><b>Đánh dấu trạng thái từng nhóm</b> theo hiện trạng hệ thống. Nguồn: báo cáo khảo sát, Khung kiến trúc số tỉnh (phần hiện trạng), kế hoạch CĐS năm (phần kết quả). Dùng bảng quy tắc ngay dưới đây. Mỗi đánh dấu phải ghi nguồn; không có nguồn thì ghi “chờ xác nhận”.</li>
+      <li><b>Lọc trùng.</b> Kiểm tra từng nhóm với 3 nguồn:<ul><li>CSDL quốc gia và Khung kiến trúc dữ liệu quốc gia (QĐ 2439/QĐ-TTg);</li><li>79 nền tảng số dùng chung quốc gia (QĐ 1132/QĐ-TTg: 17 nền tảng nhóm A, 62 nền tảng nhóm B).</li></ul>Trùng toàn bộ thì chuyển sang kết nối, khai thác; trùng một phần thì chỉ đầu tư phần không trùng.</li>
+      <li><b>Kiểm tra độ đầy đủ</b> bằng ma trận (tr. 21, 23):<ul><li>mọi chỉ tiêu của kế hoạch tỉnh và QĐ 1266 có ít nhất một nhóm thực hiện;</li><li>mọi bài toán lớn có nhóm;</li><li>mọi chỉ số DTI mất điểm có nhóm cải thiện.</li></ul>Nhóm chưa có chỉ tiêu thì nêu rõ (Cà Mau: nhóm 27 “Kinh tế không gian tầm thấp (UAV)”, nhóm 29 “Cảnh báo sớm thiên tai, xâm nhập mặn”).</li>
+    </ol>
+    <div class="tbl"><table>
+      <thead><tr><th>Hiện trạng tìm thấy</th><th>Xử lý</th><th>Ký hiệu trên tr. 14</th></tr></thead>
+      <tbody>
+        <tr><td>Đã có hệ thống, đang dùng hiệu quả</td><td>Kế thừa: giữ, không đầu tư mới</td><td>Đã có hệ thống</td></tr>
+        <tr><td>Đã có nhưng thiếu chức năng, chưa kết nối, chưa phủ địa bàn tỉnh cũ</td><td>Nâng cấp hoặc tích hợp</td><td>Đã có hệ thống · nâng cấp</td></tr>
+        <tr><td>Nhiều hệ thống cùng chức năng (thường do hợp nhất hai tỉnh)</td><td>Thay thế hoặc hợp nhất</td><td>Đã có hệ thống · nâng cấp</td></tr>
+        <tr><td>Trùng nền tảng quốc gia, không còn dùng</td><td>Loại bỏ; chuyển sang kết nối nền tảng quốc gia</td><td>Ghi chú riêng</td></tr>
+        <tr><td>Chưa có hệ thống</td><td>Xây mới</td><td>Chưa có hệ thống · xây mới</td></tr>
+        <tr><td>Nhiệm vụ có nội dung triển khai tới xã, phường</td><td>Giữ trạng thái trên, thêm nhãn cấp xã</td><td>Xã</td></tr>
+        <tr><td>Không có trong kế hoạch của tỉnh</td><td>Bổ sung nếu có cơ sở thực tế</td><td>Bổ sung ngoài kế hoạch</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note"><b>Bảng làm việc (Excel), mỗi dòng một nhóm:</b> Mã nhóm · Tên nhóm · Lớp · Nhiệm vụ, dự án của kế hoạch tỉnh · Bài toán lớn · Hệ thống hiện có · Trạng thái · Nguồn hiện trạng · Cấp xã · Ngoài kế hoạch · Chỉ tiêu liên quan · Chỉ số DTI · Nền tảng quốc gia liên quan.</p>
+
+    <h3 class="sub">Cách chọn nhóm nhiệm vụ tiêu biểu để minh họa (tr. 15–19)</h3>
+    <ol class="outline">
+      <li><b>Xác định tỉnh tập trung vào đâu.</b> Đọc danh mục bài toán lớn, kế hoạch CĐS 2026–2030, đột phá trong NQ Đại hội Đảng bộ tỉnh và ngành chủ lực trong cơ cấu GRDP.</li>
+      <li><b>Ánh xạ vào khung.</b> Mỗi trọng tâm ứng với một hoặc vài nhóm nhiệm vụ đã có ở tr. 14; không tạo nhóm mới ngoài khung.</li>
+      <li><b>Chọn khoảng 5 trang.</b> Ưu tiên lĩnh vực có bài toán lớn, có chỉ tiêu trong kế hoạch của tỉnh và có số liệu hiện trạng. Lĩnh vực thiếu số liệu thì để phụ lục.</li>
+      <li><b>Ghi mã nhóm trên dòng nhận diện</b> của từng trang (ví dụ “II. Minh họa nhóm nhiệm vụ 23, 36 · Du lịch”) để người nghe nối được trang minh họa với khung tổng thể.</li>
+    </ol>
+    <p class="note">ƯT1 trong cột “Nhóm VB” = nhóm văn bản “Ưu tiên số 1” ở mục S3.</p>
+
+    <h3 class="sub">Bố cục chuẩn một trang minh họa (tr. 15–19)</h3>
+    <div class="anatomy">
+      <div class="slide" role="img" aria-label="Sơ đồ bố cục trang slide theo lớp, 6 vùng">
+        <div class="z z1"><i>1</i></div>
+        <div class="z z2"><i>2</i></div>
+        <div class="kpis"><div class="z kpi dark"><i>3</i></div><div class="z kpi"><i>3</i></div><div class="z kpi"><i>3</i></div><div class="z kpi"><i>3</i></div></div>
+        <div class="blocks"><div class="z"><i>4</i></div><div class="z"><i>4</i></div></div>
+        <div class="z band"><i>5</i></div>
+        <div class="z z6"><i>6</i></div>
+      </div>
+      <ol class="legend">
+        <li><b>Dòng nhận diện:</b> phần · nhóm nhiệm vụ · lĩnh vực (ví dụ “II. Minh họa nhóm nhiệm vụ 23, 36 · Du lịch”).</li>
+        <li><b>Tiêu đề</b> theo văn phong hành chính, nêu đúng nội dung trang.</li>
+        <li><b>4–5 ô số liệu hiện trạng:</b> số, mô tả, năm. Ô đầu tô đậm là số nổi bật nhất. Chỉ dùng số có nguồn.</li>
+        <li><b>2 khối nhiệm vụ:</b> tên khối kèm mã dự án, bài toán lớn; mỗi dòng một nhiệm vụ. Nội dung tỉnh chưa có thì ghi “(đề xuất VNPT)”.</li>
+        <li><b>Dải mục tiêu:</b> chỉ tiêu nguyên văn kèm mã và văn bản gốc, hoặc thông điệp nêu khoảng cách lớn nhất.</li>
+        <li><b>Dòng nguồn và số trang:</b> liệt kê đủ văn bản, báo đã dùng trên trang.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="sl-rules">
+    <h2 id="sl-rules"><span class="n">S5</span>Nguyên tắc trình bày slide</h2>
+    <ol class="rules">
+      <li><span><b>Tổng thể trước, hợp tác sau.</b> Slide chỉ nêu nội dung thỏa thuận hợp tác thì lãnh đạo tỉnh không chấp thuận (bài học Cà Mau).</span></li>
+      <li><span><b>Khung tổng thể trước, minh họa sau:</b> trình bày toàn bộ nhóm nhiệm vụ trên một trang, rồi minh họa vài nhóm tiêu biểu; không trình bày lần lượt từng nhóm.</span></li>
+      <li><span><b>Số liệu phải có nguồn</b> ở dòng nguồn cuối trang; số lấy từ báo chí ghi tên báo, ngày.</span></li>
+      <li><span><b>Thuật ngữ nguyên văn:</b> tên lớp, tên chỉ tiêu, tên văn bản chép đúng bản gốc.</span></li>
+      <li><span><b>Tiêu đề hành chính</b>, nêu đúng nội dung trang; không dùng khẩu hiệu.</span></li>
+      <li><span><b>Chữ từ 10 pt trở lên</b>; chỗ còn trống thì tăng cỡ chữ; mỗi trang có một điểm nhấn.</span></li>
+      <li><span><b>Nội dung nhạy cảm để trong ghi chú</b>, không đưa lên trang.</span></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="sl-check">
+    <h2 id="sl-check"><span class="n">S6</span>Checklist trước khi trình bày</h2>
+    <p class="progress" id="prog-sl" aria-live="polite">Đã đánh dấu 0/0</p>
+    <div class="check" id="check-sl">
+      <label class="cb"><input type="checkbox" id="s1"><span>Mọi ô số liệu có nguồn ở dòng nguồn cuối trang</span></label>
+      <label class="cb"><input type="checkbox" id="s2"><span>Số liệu chênh lệch giữa các nguồn đã chọn số mới nhất và ghi chú số khác</span></label>
+      <label class="cb"><input type="checkbox" id="s3"><span>Chỉ tiêu, tên lớp khớp nguyên văn văn bản gốc</span></label>
+      <label class="cb"><input type="checkbox" id="s4"><span>Số nhóm, số nhiệm vụ thống nhất giữa trang khung nhóm (tr. 14) và các trang minh họa</span></label>
+      <label class="cb"><input type="checkbox" id="s5"><span>Nội dung đề xuất mới đã ghi “(đề xuất VNPT)”</span></label>
+      <label class="cb"><input type="checkbox" id="s6"><span>Điểm DTI dự kiến ghi rõ phiên bản bộ chỉ số</span></label>
+      <label class="cb"><input type="checkbox" id="s7"><span>Không có nội dung nhạy cảm trên trang; đã chuyển vào ghi chú</span></label>
+      <label class="cb"><input type="checkbox" id="s9"><span>Đã rà soát với Lãnh đạo Công ty và VNPT TTp (hoặc lãnh đạo VNPT TTp đã nhận xét); đã chỉnh theo góp ý</span></label>
+    </div>
+  </section>
+</div>
+
+<!-- ================= TAB ĐỀ ÁN ================= -->
+<div class="panel-tab" role="tabpanel" id="p-dean" aria-labelledby="t-dean" hidden>
+
+  <div class="tabsum">
+    <span><b>Mục đích:</b> văn bản tỉnh ban hành, cụ thể hóa Kế hoạch CĐS 5 năm theo Luật CĐS và NĐ 224</span>
+    <span><b>Chủ trì trình:</b> Sở KH&amp;CN</span>
+  </div>
+
+  <section aria-labelledby="da-steps">
+    <h2 id="da-steps"><span class="n">D1</span>Quy trình làm đề án</h2>
+    <div class="steps">
+      <div class="colhead"><span>Bước</span><span>Việc cần làm</span><span>Đầu vào · ai cung cấp</span><span>Đầu ra</span></div>
+
+      <div class="step">
+        <div class="id"><span class="k">1</span><span class="t">Khởi động, chốt phân vai</span><span class="w">Tuần 1</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Đọc công văn của tỉnh: loại sản phẩm, hạn</li>
+          <li>Trình Lãnh đạo Công ty văn bản báo cáo Tập đoàn về việc xây dựng đề án cho tỉnh (BM07, BM08)</li>
+          <li>Đề xuất phân vai: VNPT TTp khảo sát, lập báo cáo khảo sát, gặp gỡ trao đổi với tỉnh; VNPT IT viết đề án dựa trên số liệu VNPT TTp cung cấp</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Công văn của UBND tỉnh/Sở KH&amp;CN <span class="who">(VNPT TTp)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div>Văn bản báo cáo Tập đoàn được phát hành; phân vai VNPT TTp – VNPT IT được thống nhất</div>
+        <div class="gate"><span class="mono">G1</span> Sở KH&amp;CN thống nhất đề cương và kế hoạch</div>
+      </div>
+
+      <div class="step">
+        <div class="id"><span class="k">2a</span><span class="t">Thu thập, khảo sát</span><span class="w">Tuần 2–3</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Gửi danh mục tài liệu (BM01) và biểu mẫu khảo sát</li>
+          <li>Lập danh mục văn bản đã nhận: số hiệu, ngày, hiệu lực</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Văn bản tỉnh <span class="who">(Sở KH&amp;CN qua VNPT TTp)</span>; phiếu khảo sát, tài liệu hệ thống <span class="who">(sở, ngành, cấp xã)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div>Báo cáo kết quả khảo sát; hồ sơ hệ thống, CSDL</div>
+      </div>
+
+      <div class="step">
+        <div class="id"><span class="k">2b</span><span class="t">Đánh giá hiện trạng</span><span class="w">Tuần 3</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Trích số liệu nguyên văn theo lớp, ghi nguồn</li>
+          <li>Lập bảng chênh lệch, gửi tỉnh xác nhận</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Kết quả bước 2a <span class="who">(Ban CLSP)</span>; xác nhận số liệu <span class="who">(Sở KH&amp;CN, sở, ngành)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div>BM02, BM03; Chương I</div>
+        <div class="gate"><span class="mono">G2</span> Số liệu hiện trạng đã được sở, ngành xác nhận</div>
+      </div>
+
+      <div class="step">
+        <div class="id"><span class="k">3</span><span class="t">Mục tiêu, chỉ tiêu, kiến trúc</span><span class="w">Tuần 3–4</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Đối chiếu chỉ tiêu Trung ương – Tỉnh ủy – UBND tỉnh</li>
+          <li>Dựng khung nhóm nhiệm vụ theo lớp QĐ 1425</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>QĐ 1266, QĐ 1425, QĐ 2439 <span class="who">(Ban CLSP)</span>; chốt chỉ tiêu còn khác nhau <span class="who">(UBND tỉnh)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div>BM04; Chương II, III</div>
+      </div>
+
+      <div class="step">
+        <div class="id"><span class="k">4</span><span class="t">Nhiệm vụ, dự án, kinh phí</span><span class="w">Tuần 4–6</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Với mỗi nhóm: Hiện trạng → Đích đến → Nhiệm vụ</li>
+          <li>Đối chiếu 79 nền tảng (QĐ 1132), không đề xuất trùng</li>
+          <li>Khái toán, nguồn vốn, lộ trình</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Năng lực giải pháp VNPT IT, khái toán <span class="who">(Ban CLSP)</span>; đầu tư công <span class="who">(VNPT TTp)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div>BM05, BM06; Chương IV–VII; dự thảo thuyết minh</div>
+        <div class="gate"><span class="mono">G3</span> Lãnh đạo Công ty duyệt bản gửi tỉnh</div>
+      </div>
+
+      <div class="step">
+        <div class="id"><span class="k">5</span><span class="t">Tham vấn, lấy ý kiến</span><span class="w">Tuần 6–8</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Trình bày tại hội thảo bằng slide (tab Slide)</li>
+          <li>Lập bảng tiếp thu, giải trình từng ý kiến</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Tổ chức hội thảo <span class="who">(Sở KH&amp;CN, VNPT TTp)</span>; ý kiến <span class="who">(sở, ngành, cấp xã)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div>Biên bản hội thảo; bảng tiếp thu</div>
+        <div class="gate"><span class="mono">G4</span> Sở KH&amp;CN chấp thuận hồ sơ trình</div>
+      </div>
+
+      <div class="step">
+        <div class="id"><span class="k">6</span><span class="t">Hoàn thiện, trình, bàn giao</span><span class="w">Tuần 8–10</span></div>
+        <div class="cell"><div class="lbl">Việc cần làm</div><ul>
+          <li>Giải trình trước Tổ chuyên gia, hội đồng thẩm định</li>
+          <li>Soạn dự thảo Tờ trình, Quyết định</li>
+          <li>Khi đề án được ban hành, bàn giao Ban KDGP</li>
+        </ul></div>
+        <div class="cell"><div class="lbl">Đầu vào · ai cung cấp</div>Ý kiến thẩm định <span class="who">(Sở KH&amp;CN)</span>; chỉ đạo <span class="who">(UBND tỉnh)</span>; điều phối <span class="who">(VNPT TTp)</span></div>
+        <div class="cell"><div class="lbl">Đầu ra</div><span class="final">Đề án hoàn chỉnh</span>; Tờ trình, dự thảo Quyết định</div>
+      </div>
+    </div>
+    <p class="warn"><b>Khâu dễ tắc nhất là bước 2a.</b> Chưa có báo cáo khảo sát thì chưa chốt được các nhiệm vụ kết nối, chia sẻ dữ liệu. Vì vậy mốc hoàn thành đề án luôn ghi theo mốc chốt số liệu khảo sát (bài học Thanh Hóa).</p>
+  </section>
+
+  <section aria-labelledby="da-raci">
+    <h2 id="da-raci"><span class="n">D2</span>Phân công làm đề án (RACI)</h2>
+    <p class="lead">R – Thực hiện · A – Chịu trách nhiệm cuối cùng · C – Tham vấn · I – Được thông báo. Mỗi việc có đúng một A.</p>
+
+    <h3 class="sub">1. VNPT IT – VNPT TTp</h3>
+    <div class="tbl"><table class="raci">
+      <thead>
+        <tr><th rowspan="2">Việc</th><th colspan="2" class="grp">VNPT IT</th><th class="grp">Địa bàn</th></tr>
+        <tr><th>Ban CLSP</th><th>Lãnh đạo VNPT IT</th><th>VNPT TTp</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Tiếp nhận công văn của tỉnh, chuyển VNPT IT</td><td>I</td><td>I</td><td class="a">A/R</td></tr>
+        <tr><td>Trình văn bản báo cáo Tập đoàn về việc xây dựng đề án, đề xuất phân vai</td><td>R</td><td class="a">A</td><td>C</td></tr>
+        <tr><td>Thống nhất bằng văn bản đầu mối, cơ chế phối hợp giữa hai đơn vị</td><td>R</td><td class="a">A</td><td>R</td></tr>
+        <tr><td>Gửi biểu mẫu khảo sát, danh mục thông tin, số liệu cần thu thập</td><td class="a">A/R</td><td>–</td><td>I</td></tr>
+        <tr><td>Tổ chức khảo sát diện rộng tại sở, ngành, cấp xã</td><td>C</td><td>–</td><td class="a">A/R</td></tr>
+        <tr><td>Lập, chuyển báo cáo kết quả khảo sát cho VNPT IT</td><td>C</td><td>–</td><td class="a">A/R</td></tr>
+        <tr><td>Gặp gỡ, trao đổi với tỉnh; đề nghị tỉnh xác nhận số liệu</td><td>C</td><td>–</td><td class="a">A/R</td></tr>
+        <tr><td>Viết đề án dựa trên số liệu VNPT TTp cung cấp</td><td class="a">A/R</td><td>I</td><td>C</td></tr>
+        <tr><td>Duyệt bản đề án gửi tỉnh</td><td>R</td><td class="a">A</td><td>C</td></tr>
+        <tr><td>Gửi đề án cho tỉnh, theo dõi phản hồi</td><td>I</td><td>I</td><td class="a">A/R</td></tr>
+        <tr><td>Giải trình chuyên môn trước Sở KH&amp;CN, Tổ chuyên gia, hội đồng thẩm định</td><td class="a">A/R</td><td>I</td><td>R (điều phối)</td></tr>
+        <tr><td>Tiếp thu ý kiến, hoàn thiện đề án</td><td class="a">A/R</td><td>I</td><td>C</td></tr>
+        <tr><td>Theo dõi trình, phê duyệt</td><td>I</td><td>I</td><td class="a">A/R</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">VNPT TTp là đầu mối với tỉnh: khảo sát, lập báo cáo khảo sát, gặp gỡ trao đổi. VNPT IT (Ban CLSP) viết đề án và giải trình chuyên môn; nhân sự chỉ đi tỉnh khi dự họp Tổ chuyên gia hoặc bảo vệ đề án.</p>
+
+    <h3 class="sub">2. VNPT – tỉnh (Sở KH&amp;CN chủ trì)</h3>
+    <div class="tbl"><table class="raci">
+      <thead>
+        <tr><th>Việc</th><th>VNPT (TTp đầu mối, IT chuyên môn)</th><th>Sở KH&amp;CN</th><th>Sở, ngành, UBND cấp xã</th><th>UBND tỉnh</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Giao nhiệm vụ, đề nghị VNPT phối hợp xây dựng đề án</td><td>I</td><td>R (tham mưu)</td><td>I</td><td class="a">A</td></tr>
+        <tr><td>Ban hành văn bản, biểu mẫu khảo sát gửi sở, ngành, cấp xã</td><td>R (đề xuất biểu mẫu)</td><td class="a">A/R</td><td>I</td><td>–</td></tr>
+        <tr><td>Khảo sát thực tế tại sở, ngành, doanh nghiệp, người dân, cấp xã (VNPT TTp cử người)</td><td class="a">A/R</td><td>C (đôn đốc)</td><td>R (tiếp, cung cấp)</td><td>–</td></tr>
+        <tr><td>Cử đầu mối; cung cấp số liệu, hồ sơ kỹ thuật của hệ thống đang vận hành</td><td>I</td><td class="a">A</td><td>R</td><td>–</td></tr>
+        <tr><td>Tổng hợp số liệu, lập báo cáo kết quả khảo sát</td><td class="a">A/R</td><td>C</td><td>C</td><td>–</td></tr>
+        <tr><td>Xác nhận, chốt số liệu khảo sát</td><td>C</td><td class="a">A/R</td><td>C</td><td>–</td></tr>
+        <tr><td>Thống nhất chỉ tiêu còn khác nhau giữa kế hoạch của Tỉnh ủy và UBND tỉnh</td><td>C (bảng đối chiếu)</td><td>R</td><td>C</td><td class="a">A</td></tr>
+        <tr><td>Hoàn thiện dự thảo đề án trên cơ sở báo cáo khảo sát</td><td class="a">A/R</td><td>C</td><td>C</td><td>I</td></tr>
+        <tr><td>Lấy ý kiến; Tổ chuyên gia, hội đồng thẩm định</td><td>R (giải trình)</td><td class="a">A/R</td><td>C</td><td>I</td></tr>
+        <tr><td>Trình và phê duyệt đề án</td><td>I</td><td>R</td><td>I</td><td class="a">A</td></tr>
+        <tr><td>Tổ chức thực hiện, theo dõi, đánh giá</td><td>C</td><td>R (đầu mối)</td><td>R</td><td class="a">A</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Sở KH&amp;CN chủ trì về văn bản: ban hành biểu mẫu khảo sát, xác nhận số liệu, tổ chức thẩm định. Việc đi khảo sát và tổng hợp số liệu thực tế do VNPT TTp cử người làm; VNPT IT hoàn thiện đề án. Mốc hoàn thành đề án phụ thuộc mốc chốt báo cáo khảo sát.</p>
+  </section>
+
+  <section aria-labelledby="da-inputs">
+    <h2 id="da-inputs"><span class="n">D3</span>Đầu vào theo từng chương</h2>
+    <p class="warn"><b>Văn bản tỉnh quan trọng nhất:</b> Kế hoạch CĐS giai đoạn 2026–2030; danh mục bài toán lớn; báo cáo khảo sát 214; báo cáo khảo sát xây dựng Khung kiến trúc số và Khung kiến trúc dữ liệu; kết quả công bố DTI; kế hoạch nâng cao DTI (nếu có). Đề nghị tỉnh cung cấp ngay ở bước 1, trước các văn bản khác.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Chương</th><th>Văn bản, tài liệu cần có</th><th>Ai cung cấp</th></tr></thead>
+      <tbody>
+        <tr><td class="nm">Mở đầu: sự cần thiết, căn cứ</td><td>NQ 57-NQ/TW; Luật CĐS 148/2025/QH15 (Điều 12); NĐ 224/2026/NĐ-CP (Điều 4, 7); QĐ 1266/QĐ-TTg; NQ Đại hội Đảng bộ tỉnh</td><td>Ban CLSP tra cứu; văn bản tỉnh do Sở KH&amp;CN</td></tr>
+        <tr><td class="nm">I. Bối cảnh, hiện trạng</td><td>Báo cáo khảo sát 214; báo cáo khảo sát xây dựng Khung KTS, Khung KTDL; kết quả công bố DTI, kế hoạch nâng cao DTI; kế hoạch CĐS năm; báo cáo kết quả CĐS, Đề án 06; danh mục CSDL; tài liệu thiết kế CSDL, khả năng kết nối</td><td>Sở KH&amp;CN, sở, ngành, cấp xã (qua VNPT TTp)</td></tr>
+        <tr><td class="nm">II. Quan điểm, mục tiêu</td><td>Kế hoạch CĐS giai đoạn 2026–2030 của tỉnh; danh mục bài toán lớn; QĐ 1266 (24 chỉ tiêu đến 2030); NQ Đại hội, kế hoạch Tỉnh ủy</td><td>Ban CLSP tổng hợp; UBND tỉnh chốt chỉ tiêu</td></tr>
+        <tr><td class="nm">III. Khung kiến trúc</td><td>QĐ 1425/QĐ-TTg; QĐ 2439/QĐ-TTg; QĐ 1132/QĐ-TTg; Khung KTS, Khung KTDL tỉnh</td><td>Ban CLSP; Sở KH&amp;CN</td></tr>
+        <tr><td class="nm">IV. Nhiệm vụ, giải pháp</td><td>Kết quả khảo sát; năng lực giải pháp VNPT IT; đề án các tỉnh đã làm (Thanh Hóa, Cà Mau)</td><td>VNPT TTp (kết quả khảo sát); Ban CLSP (năng lực giải pháp, đề án các tỉnh)</td></tr>
+        <tr><td class="nm">V. Kinh phí, nguồn vốn</td><td>Kế hoạch đầu tư công trung hạn; cơ chế chi tại NĐ 224; khái toán</td><td>VNPT TTp (kế hoạch đầu tư công); Ban CLSP (khái toán)</td></tr>
+        <tr><td class="nm">VI. Hiệu quả, rủi ro</td><td>QĐ 405/QĐ-BKHCN và dự thảo bộ chỉ số mới; cách đo kinh tế số; QĐ 5645/QĐ-BCA-TTDLQG</td><td>Ban CLSP</td></tr>
+        <tr><td class="nm">VII. Tổ chức thực hiện</td><td>NĐ 224 Điều 7 (phê duyệt, gửi Bộ KH&amp;CN, báo cáo); chức năng của các sở, ngành</td><td>Ban CLSP; Sở KH&amp;CN</td></tr>
+        <tr><td class="nm">Phụ lục</td><td>BM04 bộ chỉ tiêu; BM05 danh mục nhiệm vụ, dự án; BM06 ma trận; khái toán; lộ trình</td><td>Ban CLSP</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section aria-labelledby="da-struct">
+    <h2 id="da-struct"><span class="n">D4</span>Cấu trúc thuyết minh Đề án</h2>
+    <ol class="outline">
+      <li><b>Mở đầu</b><ul><li>Sự cần thiết; căn cứ (Trung ương – Đảng bộ tỉnh – UBND tỉnh); phạm vi, thời gian</li></ul></li>
+      <li><b>Chương I. Bối cảnh và hiện trạng</b><ul><li>Kết quả giai đoạn trước theo lớp; DTI; tồn tại, nguyên nhân (trích nguyên văn); cơ hội, thách thức</li></ul></li>
+      <li><b>Chương II. Quan điểm, mục tiêu, tầm nhìn</b><ul><li>Mục tiêu đến 2030 (chi tiết ở Phụ lục 01); tầm nhìn 2035</li></ul></li>
+      <li><b>Chương III. Khung kiến trúc và mô hình tổng thể</b><ul><li>Kiến trúc số theo QĐ 1425; kiến trúc dữ liệu theo QĐ 2439; IOC, trợ lý AI; đối chiếu 79 nền tảng; khung nhóm nhiệm vụ (cách dựng: tab Slide, mục S4, “Cách dựng khung nhóm nhiệm vụ đầy đủ”)</li></ul></li>
+      <li><b>Chương IV. Nhiệm vụ và giải pháp</b><ul><li>Theo nhóm: Hiện trạng → Đích đến → Nhiệm vụ; nhiệm vụ trọng điểm; giải pháp thể chế, tài chính, nhân lực, an toàn thông tin</li></ul></li>
+      <li><b>Chương V. Kinh phí và nguồn vốn</b><ul><li>Theo nhiệm vụ, năm, nguồn (NSTW, NSĐP, thuê dịch vụ, xã hội hóa)</li></ul></li>
+      <li><b>Chương VI. Hiệu quả và rủi ro</b><ul><li>Ma trận chỉ tiêu – nhiệm vụ; kinh tế số trong GRDP; DTI dự kiến; rủi ro, biện pháp</li></ul></li>
+      <li><b>Chương VII. Tổ chức thực hiện</b><ul><li>Trách nhiệm Sở KH&amp;CN, sở, ngành, cấp xã; chế độ báo cáo; sơ kết 2028, tổng kết 2030</li></ul></li>
+      <li><b>Phụ lục</b><ul><li>01 Bộ chỉ tiêu · 02 Danh mục nhiệm vụ, dự án · 03 Khái toán · 04 Ma trận chỉ tiêu – nhiệm vụ · 05 Danh mục CSDL · 06 Lộ trình</li></ul></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="da-forms">
+    <h2 id="da-forms"><span class="n">D5</span>Biểu mẫu và văn bản hành chính</h2>
+    <div class="forms">
+      <div><span class="mono">BM01</span><span>Danh mục tài liệu đề nghị tỉnh cung cấp</span></div>
+      <div><span class="mono">BM02</span><span>Bảng hiện trạng có nguồn</span></div>
+      <div><span class="mono">BM03</span><span>Bảng chênh lệch số liệu</span></div>
+      <div><span class="mono">BM04</span><span>Bộ chỉ tiêu (Phụ lục 01)</span></div>
+      <div><span class="mono">BM05</span><span>Danh mục nhiệm vụ, dự án (Phụ lục 02)</span></div>
+      <div><span class="mono">BM06</span><span>Ma trận chỉ tiêu – nhiệm vụ – DTI</span></div>
+      <div><span class="mono">BM07</span><span>Tờ trình Lãnh đạo Công ty</span></div>
+      <div><span class="mono">BM08</span><span>Báo cáo Tập đoàn, đề xuất phân vai</span></div>
+      <div><span class="mono">BM09</span><span>Văn bản trả lời UBND tỉnh/Sở KH&amp;CN</span></div>
+      <div><span class="mono">BM10</span><span>Văn bản giao nhiệm vụ nội bộ</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="da-rules">
+    <h2 id="da-rules"><span class="n">D6</span>Nguyên tắc viết đề án</h2>
+    <ol class="rules">
+      <li><span><b>Bám kế hoạch CĐS của chính tỉnh</b> và NQ Đại hội Đảng bộ tỉnh.</span></li>
+      <li><span><b>Hiện trạng trích nguyên văn, có nguồn</b>; không có thì ghi “Chưa có số liệu”.</span></li>
+      <li><span><b>Chỉ tiêu khác nhau giữa các văn bản</b> thì lập bảng đối chiếu, đề nghị cấp có thẩm quyền chốt.</span></li>
+      <li><span><b>Không trùng chức năng</b> với 79 nền tảng số dùng chung quốc gia.</span></li>
+      <li><span><b>Không nêu tên sản phẩm, nhà cung cấp</b>; chỉ mô tả yêu cầu chức năng.</span></li>
+      <li><span><b>Mốc hoàn thành gắn với mốc chốt khảo sát</b>, ghi rõ trong văn bản gửi tỉnh.</span></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="da-check">
+    <h2 id="da-check"><span class="n">D7</span>Checklist trước khi gửi tỉnh</h2>
+    <p class="progress" id="prog-da" aria-live="polite">Đã đánh dấu 0/0</p>
+    <div class="check" id="check-da">
+      <label class="cb"><input type="checkbox" id="c1"><span>Mọi số liệu hiện trạng có nguồn; ô không có số ghi “Chưa có số liệu”</span></label>
+      <label class="cb"><input type="checkbox" id="c2"><span>Bảng chênh lệch số liệu (BM03) đã được tỉnh xác nhận</span></label>
+      <label class="cb"><input type="checkbox" id="c3"><span>Số hiệu, ngày, hiệu lực của văn bản căn cứ đã đối chiếu bản gốc</span></label>
+      <label class="cb"><input type="checkbox" id="c4"><span>Tên lớp, tên chỉ tiêu khớp nguyên văn văn bản gốc</span></label>
+      <label class="cb"><input type="checkbox" id="c5"><span>Mỗi chỉ tiêu gắn với đúng một nhóm nhiệm vụ chính</span></label>
+      <label class="cb"><input type="checkbox" id="c6"><span>Thuyết minh, phụ lục và slide khớp nhau về số liệu, số nhóm, số nhiệm vụ</span></label>
+      <label class="cb"><input type="checkbox" id="c7"><span>Không trùng chức năng 79 nền tảng số dùng chung quốc gia</span></label>
+      <label class="cb"><input type="checkbox" id="c8"><span>Mốc hoàn thành gắn với mốc chốt báo cáo khảo sát</span></label>
+      <label class="cb"><input type="checkbox" id="c9"><span>Khái toán, nguồn vốn khớp với kế hoạch đầu tư công của tỉnh</span></label>
+      <label class="cb"><input type="checkbox" id="c10"><span>Lãnh đạo Công ty đã duyệt phát hành</span></label>
+    </div>
+  </section>
+</div>
+</div>
+
+<footer>
+  <span>Đầu mối: Ban Chiến lược sản phẩm, VNPT IT · Cập nhật 22/10/2026</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  function track(listSel,progId,key,fmt){
+    var boxes=[].slice.call(document.querySelectorAll(listSel+' input'));
+    var prog=document.getElementById(progId);
+    function render(){var n=boxes.filter(function(b){return b.checked}).length;prog.textContent=fmt(n,boxes.length);}
+    try{var s=JSON.parse(localStorage.getItem(key)||'[]');boxes.forEach(function(b){if(s.indexOf(b.id)>-1)b.checked=true;});}catch(e){}
+    boxes.forEach(function(b){b.addEventListener('change',function(){
+      render();
+      try{localStorage.setItem(key,JSON.stringify(boxes.filter(function(x){return x.checked}).map(function(x){return x.id})));}catch(e){}
+    });});
+    render();
+  }
+  track('#inputs','prog-in','cds-inputs-v3',function(n,t){return 'Đã có '+n+'/'+t+' văn bản';});
+  track('#check-sl','prog-sl','cds-check-slide-v1',function(n,t){return 'Đã đánh dấu '+n+'/'+t;});
+  track('#check-da','prog-da','cds-checklist-v1',function(n,t){return 'Đã đánh dấu '+n+'/'+t;});
+
+  var tabs=[].slice.call(document.querySelectorAll('[role="tab"]'));
+  var map={'slide':'t-slide','de-an':'t-dean'};
+  function select(tab,focus){
+    tabs.forEach(function(t){
+      var on=t===tab;
+      t.setAttribute('aria-selected',on?'true':'false');
+      t.tabIndex=on?0:-1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
+    });
+    if(focus)tab.focus();
+    try{localStorage.setItem('cds-tab',tab.id);}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t,false);});
+    t.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();var n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];select(n,true);}
+    });
+  });
+  var start=null;
+  var h=(location.hash||'').replace('#','');
+  if(map[h])start=document.getElementById(map[h]);
+  if(!start){try{var s=localStorage.getItem('cds-tab');if(s)start=document.getElementById(s);}catch(e){}}
+  if(start)select(start,false);
+})();
+</script>
+
+</body></html>
